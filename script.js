@@ -66,10 +66,29 @@ newBookButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(formTitle.value);
-  console.log(formAuthor.value);
-  console.log(formPages.value);
-  console.log(formHaveRead.value);
+  const bookx = new Book(
+    formTitle.value,
+    formAuthor.value,
+    formPages.value,
+    formHaveRead.value
+  );
+  addBookToLibrary(bookx);
+  const bookCard = document.createElement("div");
+  bookCard.className = "book-card";
+  const title = document.createElement("h3");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const haveRead = document.createElement("p");
+  (title.innerText = formTitle.value),
+    (author.innerText = `Author: ${formAuthor.value}`);
+  pages.innerText = `${formPages.value} pages`;
+  haveRead.innerText = formHaveRead.value;
+  bookCard.appendChild(title);
+  bookCard.appendChild(author);
+  bookCard.appendChild(pages);
+  bookCard.appendChild(haveRead);
+  container.appendChild(bookCard);
+
   bookForm.style.display = "none";
 });
 
