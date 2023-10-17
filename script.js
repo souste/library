@@ -1,4 +1,7 @@
 const container = document.querySelector(".container");
+const card = document.createElement("div");
+card.classList.add("book-card");
+container.appendChild(card);
 
 const myLibrary = [
   { title: "The Hobbit", author: "J.R.R Tolkien", pages: 295, read: "read" },
@@ -30,26 +33,21 @@ function addBookToLibrary(book) {
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 
-let title;
-let author;
-let pages;
-let read;
+myLibrary.forEach((books) => {
+  const bookCard = document.createElement("div");
+  bookCard.className = "book-card";
+  const title = document.createElement("p");
+  const author = document.createElement("p");
+  const pages = document.createElement("p");
+  const haveRead = document.createElement("p");
+  title.innerText = books.title;
+  author.innerText = books.author;
+  pages.innerText = books.pages;
+  haveRead.innerText = books.read;
 
-function displayList(library) {
-  return library.forEach((book) => {
-    const bookTitle = document.createElement("div");
-    const bookAuthor = document.createElement("div");
-    const bookPages = document.createElement("div");
-    const bookRead = document.createElement("div");
-    bookTitle.innerText = book.title;
-    bookAuthor.innerText = book.author;
-    bookPages.innerText = book.pages;
-    bookRead.innerText = book.read;
-    container.appendChild(bookTitle);
-    container.appendChild(bookAuthor);
-    container.appendChild(bookPages);
-    container.appendChild(bookRead);
-  });
-}
-
-displayList(myLibrary);
+  bookCard.appendChild(title);
+  bookCard.appendChild(author);
+  bookCard.appendChild(pages);
+  bookCard.appendChild(haveRead);
+  container.appendChild(bookCard);
+});
