@@ -36,13 +36,13 @@ addBookToLibrary(book2);
 myLibrary.forEach((books) => {
   const bookCard = document.createElement("div");
   bookCard.className = "book-card";
-  const title = document.createElement("p");
+  const title = document.createElement("h3");
   const author = document.createElement("p");
   const pages = document.createElement("p");
   const haveRead = document.createElement("p");
   title.innerText = books.title;
-  author.innerText = books.author;
-  pages.innerText = books.pages;
+  author.innerText = `Author: ${books.author}`;
+  pages.innerText = `${books.pages} pages`;
   haveRead.innerText = books.read;
 
   bookCard.appendChild(title);
