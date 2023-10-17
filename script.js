@@ -1,7 +1,5 @@
 const container = document.querySelector(".container");
-const card = document.createElement("div");
-card.classList.add("book-card");
-container.appendChild(card);
+const addButton = document.querySelector(".add-book-button");
 
 const myLibrary = [
   { title: "The Hobbit", author: "J.R.R Tolkien", pages: 295, read: "read" },
@@ -50,4 +48,8 @@ myLibrary.forEach((books) => {
   bookCard.appendChild(pages);
   bookCard.appendChild(haveRead);
   container.appendChild(bookCard);
+});
+
+addButton.addEventListener("click", () => {
+  console.log("I'm a little Jeevy");
 });
