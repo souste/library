@@ -1,5 +1,14 @@
 const container = document.querySelector(".container");
+
+const newBookButton = document.querySelector(".new-book-button");
+const cancelButton = document.querySelector(".cancel-book-button");
 const addButton = document.querySelector(".add-book-button");
+
+const bookForm = document.querySelector(".book-form");
+const formTitle = document.querySelector("#form-title");
+const formAuthor = document.querySelector("#form-author");
+const formPages = document.querySelector("#form-pages");
+const formHaveRead = document.querySelector("#form-have-read");
 
 const myLibrary = [
   { title: "The Hobbit", author: "J.R.R Tolkien", pages: 295, read: "read" },
@@ -50,6 +59,21 @@ myLibrary.forEach((books) => {
   container.appendChild(bookCard);
 });
 
-addButton.addEventListener("click", () => {
+newBookButton.addEventListener("click", () => {
   console.log("I'm a little Jeevy");
+  bookForm.style.display = "block";
+});
+
+addButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log(formTitle.value);
+  console.log(formAuthor.value);
+  console.log(formPages.value);
+  console.log(formHaveRead.value);
+  bookForm.style.display = "none";
+});
+
+//Think this is still functioning as a submit button
+cancelButton.addEventListener("click", () => {
+  bookForm.style.display = "none";
 });
