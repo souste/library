@@ -1,7 +1,4 @@
-const bookTitle = document.querySelector(".book-title");
-const bookAuthor = document.querySelector(".book-author");
-const bookPages = document.querySelector(".book-pages");
-const bookRead = document.querySelector(".book-read");
+const container = document.querySelector(".container");
 
 const myLibrary = [
   { title: "The Hobbit", author: "J.R.R Tolkien", pages: 295, read: "read" },
@@ -39,16 +36,20 @@ let pages;
 let read;
 
 function displayList(library) {
-  return (jeevy = library.forEach((book) => {
-    console.log(book.title);
+  return library.forEach((book) => {
+    const bookTitle = document.createElement("div");
+    const bookAuthor = document.createElement("div");
+    const bookPages = document.createElement("div");
+    const bookRead = document.createElement("div");
     bookTitle.innerText = book.title;
     bookAuthor.innerText = book.author;
     bookPages.innerText = book.pages;
     bookRead.innerText = book.read;
-
-    // bookDisplay.innerText = book.title;
-    // bookDisplay.innerText = book.author;
-  }));
+    container.appendChild(bookTitle);
+    container.appendChild(bookAuthor);
+    container.appendChild(bookPages);
+    container.appendChild(bookRead);
+  });
 }
 
 displayList(myLibrary);
