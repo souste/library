@@ -94,7 +94,6 @@ displayBooks();
 function deleteRow(index) {
   myLibrary.splice(index, 1);
   displayBooks();
-  console.log(document.getElementsByName("reads"));
 }
 
 function radioButtons() {}
@@ -102,12 +101,11 @@ function radioButtons() {}
 let active = false;
 
 function readRow(index) {
-  active = !active;
-
-  if (active) {
-    myLibrary[index]["read"] = "No";
-  } else {
+  console.log(myLibrary[index]["read"]);
+  if (myLibrary[index]["read"] === "No") {
     myLibrary[index]["read"] = "Yes";
+  } else {
+    myLibrary[index]["read"] = "No";
   }
   displayBooks();
 }
