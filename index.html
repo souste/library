@@ -11,7 +11,7 @@
     <div class="container">
       <h1>Library</h1>
       <button class="new-book-button">NEW BOOK</button>
-      <!-- <button class="delete-button">DELETE</button> -->
+
       <form class="book-form">
         <label for="title">Title:</label>
         <input type="text" id="form-title" placeholder="Lord Of The Rings" />
@@ -22,9 +22,14 @@
         <label for="pages">Pages:</label>
         <input type="number" id="form-pages" placeholder="1000" />
 
+ 
+        <div>
         <label for="haveRead">Have you Read?</label>
-        <input type="text" id="form-have-read" placeholder="Yes I have read" />
+        <input type="radio" name="reads" id="radio-decision" value="Yes"  checked>Yes </input>
+        <input type="radio" name="reads" id="radio-decision" value="No">No </input>
+      </div>
 
+   
         <button class="add-book-button">Add</button>
         <button class="cancel-book-button">Cancel</button>
       </form>

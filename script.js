@@ -6,7 +6,6 @@ const formHaveRead = document.querySelector("#form-have-read");
 
 const newBookButton = document.querySelector(".new-book-button");
 const addButton = document.querySelector(".add-book-button");
-const deleteButton = document.querySelector(".delete-button");
 
 const bookTable = document.getElementById("book-table");
 const bookTableHeader = bookTable.querySelector("thead");
@@ -25,14 +24,24 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-const book1 = new Book("The Hobbit", "J.R.R Tolkien", 295, "read");
-const book2 = new Book("The Lord of the Rings", "J.R.R Tolkien", 1178, "read");
-const book3 = new Book("IT", "Stephen King", 1168, "read");
+const book1 = new Book("The Hobbit", "J.R.R Tolkien", 295, "Yes");
+const book2 = new Book("The Lord of the Rings", "J.R.R Tolkien", 1178, "Yes");
+const book3 = new Book("IT", "Stephen King", 1168, "Yes");
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
-console.log(myLibrary);
+
+newBookButton.addEventListener("click", () => {
+  bookForm.style.display = "block";
+});
+
+addButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, document.querySelector(`input[name="reads"]:checked`).value);
+  addBookToLibrary(bookx);
+  displayBooks();
+});
 
 function displayBooks() {
   bookTableHeader.innerHTML = "";
@@ -50,6 +59,7 @@ function displayBooks() {
 
     for (let i = 0; i < myLibrary.length; i++) {
       let tr = document.createElement("tr");
+
       headersData.forEach((key) => {
         let td = document.createElement("td");
         td.innerHTML = myLibrary[i][key];
@@ -57,13 +67,23 @@ function displayBooks() {
         tr.appendChild(td);
       });
       // DELETE BUTTON WITHIN TABLE ROW
-      let tdButton = document.createElement("td");
-      let deleteButton = document.createElement("button");
+      const tdButton = document.createElement("td");
+      const deleteButton = document.createElement("button");
       deleteButton.innerHTML = "DELETE";
       deleteButton.addEventListener("click", () => deleteRow(i));
 
+      // HAVE READ BUTTON WITHIN TABLE ROW
+      const tdButton2 = document.createElement("td");
+      const readButton = document.createElement("button");
+      readButton.innerText = "READ?";
+      readButton.addEventListener("click", () => readRow(i));
+
       tdButton.appendChild(deleteButton);
       tr.appendChild(tdButton);
+
+      tdButton2.appendChild(readButton);
+      tr.appendChild(tdButton2);
+
       bookTableBody.appendChild(tr);
     }
   }
@@ -74,15 +94,20 @@ displayBooks();
 function deleteRow(index) {
   myLibrary.splice(index, 1);
   displayBooks();
+  console.log(document.getElementsByName("reads"));
 }
 
-newBookButton.addEventListener("click", () => {
-  bookForm.style.display = "block";
-});
+function radioButtons() {}
 
-addButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, formHaveRead.value);
-  addBookToLibrary(bookx);
+let active = false;
+
+function readRow(index) {
+  active = !active;
+
+  if (active) {
+    myLibrary[index]["read"] = "No";
+  } else {
+    myLibrary[index]["read"] = "Yes";
+  }
   displayBooks();
-});
+}
