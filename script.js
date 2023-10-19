@@ -8,6 +8,10 @@ const newBookButton = document.querySelector(".new-book-button");
 const addButton = document.querySelector(".add-book-button");
 const deleteButton = document.querySelector(".delete-button");
 
+const bookTable = document.getElementById("book-table");
+const bookTableHeader = bookTable.querySelector("thead");
+const bookTableBody = bookTable.querySelector("tbody");
+
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -30,56 +34,51 @@ addBookToLibrary(book2);
 addBookToLibrary(book3);
 console.log(myLibrary);
 
-const bookTable = document.getElementById("book-table");
-const bookTableHeader = bookTable.querySelector("thead");
-const bookTableBody = bookTable.querySelector("tbody");
-
 function displayBooks() {
   bookTableHeader.innerHTML = "";
-  let tr = document.createElement("tr");
-  const headersData = Object.keys(myLibrary[0]);
-  headersData.forEach((key) => {
-    let th = document.createElement("th");
-    th.innerHTML = key;
-    tr.appendChild(th);
-  });
-  bookTableHeader.appendChild(tr);
   bookTableBody.innerHTML = "";
-  for (let i = 0; i < myLibrary.length; i++) {
+
+  if (myLibrary.length > 0) {
     let tr = document.createElement("tr");
+    const headersData = Object.keys(myLibrary[0]);
     headersData.forEach((key) => {
-      let td = document.createElement("td");
-      td.innerHTML = myLibrary[i][key];
-
-      tr.appendChild(td);
+      let th = document.createElement("th");
+      th.innerHTML = key;
+      tr.appendChild(th);
     });
+    bookTableHeader.appendChild(tr);
 
-    let tdButton = document.createElement("td");
-    let deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "DELETE";
+    for (let i = 0; i < myLibrary.length; i++) {
+      let tr = document.createElement("tr");
+      headersData.forEach((key) => {
+        let td = document.createElement("td");
+        td.innerHTML = myLibrary[i][key];
 
-    deleteButton.addEventListener("click", () => {
-      myLibrary.pop();
-      console.log(myLibrary);
-      displayBooks();
-    });
-    tdButton.appendChild(deleteButton);
-    tr.appendChild(tdButton);
-    bookTableBody.appendChild(tr);
+        tr.appendChild(td);
+      });
+      // DELETE BUTTON WITHIN TABLE ROW
+      let tdButton = document.createElement("td");
+      let deleteButton = document.createElement("button");
+      deleteButton.innerHTML = "DELETE";
+      deleteButton.addEventListener("click", () => deleteRow(i));
+
+      tdButton.appendChild(deleteButton);
+      tr.appendChild(tdButton);
+      bookTableBody.appendChild(tr);
+    }
   }
 }
 
 displayBooks();
 
+function deleteRow(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+}
+
 newBookButton.addEventListener("click", () => {
   bookForm.style.display = "block";
 });
-
-// deleteButton.addEventListener("click", () => {
-//   myLibrary.pop();
-//   console.log(myLibrary);
-//   displayBooks();
-// });
 
 addButton.addEventListener("click", (event) => {
   event.preventDefault();
