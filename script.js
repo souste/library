@@ -6,6 +6,7 @@ const formHaveRead = document.querySelector("#form-have-read");
 
 const newBookButton = document.querySelector(".new-book-button");
 const addButton = document.querySelector(".add-book-button");
+const deleteButton = document.querySelector(".delete-button");
 
 const myLibrary = [];
 
@@ -49,8 +50,21 @@ function displayBooks() {
     headersData.forEach((key) => {
       let td = document.createElement("td");
       td.innerHTML = myLibrary[i][key];
+
       tr.appendChild(td);
     });
+
+    let tdButton = document.createElement("td");
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "DELETE";
+
+    deleteButton.addEventListener("click", () => {
+      myLibrary.pop();
+      console.log(myLibrary);
+      displayBooks();
+    });
+    tdButton.appendChild(deleteButton);
+    tr.appendChild(tdButton);
     bookTableBody.appendChild(tr);
   }
 }
@@ -60,6 +74,12 @@ displayBooks();
 newBookButton.addEventListener("click", () => {
   bookForm.style.display = "block";
 });
+
+// deleteButton.addEventListener("click", () => {
+//   myLibrary.pop();
+//   console.log(myLibrary);
+//   displayBooks();
+// });
 
 addButton.addEventListener("click", (event) => {
   event.preventDefault();

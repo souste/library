@@ -14,3 +14,17 @@
   padding: 20px;
   display: none;
 }
+
+#book-table {
+  display: grid;
+  justify-content: center;
+  border: 2px solid black;
+}
+
+th {
+  padding: 20px;
+}
+
+td {
+  padding: 10px;
+}
