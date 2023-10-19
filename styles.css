@@ -18,7 +18,8 @@ td {
 
 th {
   font-size: 30px;
-  background-color: grey;
+  background-color: rgb(111, 156, 194);
+  color: white;
 }
 
 td {
