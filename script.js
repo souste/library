@@ -33,20 +33,11 @@ addBookToLibrary(book2);
 addBookToLibrary(book3);
 
 function displayBooks() {
-  bookTableHeader.innerHTML = "";
   bookTableBody.innerHTML = "";
 
   if (myLibrary.length > 0) {
     let tr = document.createElement("tr");
     const headersData = Object.keys(myLibrary[0]);
-
-    // CREATE TABLE HEADER
-    headersData.forEach((key) => {
-      let th = document.createElement("th");
-      th.innerHTML = key;
-      tr.appendChild(th);
-    });
-    bookTableHeader.appendChild(tr);
 
     for (let i = 0; i < myLibrary.length; i++) {
       let tr = document.createElement("tr");
@@ -104,7 +95,6 @@ function deleteRow(index) {
 }
 
 function readRow(index) {
-  console.log(myLibrary[index]["read"]);
   if (myLibrary[index]["read"] === "No") {
     myLibrary[index]["read"] = "Yes";
   } else {
