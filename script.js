@@ -52,13 +52,15 @@ function displayBooks() {
       // DELETE BUTTON WITHIN TABLE ROW
       const tdButton = document.createElement("td");
       const deleteButton = document.createElement("button");
+      deleteButton.className = "delete-button";
       deleteButton.innerHTML = "DELETE";
       deleteButton.addEventListener("click", () => deleteRow(i));
 
       // HAVE READ BUTTON WITHIN TABLE ROW
       const tdButton2 = document.createElement("td");
       const readButton = document.createElement("button");
-      readButton.innerText = "READ?";
+      readButton.className = "read-button";
+      readButton.innerText = "READ";
       readButton.addEventListener("click", () => readRow(i));
 
       tdButton.appendChild(deleteButton);
