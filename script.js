@@ -32,17 +32,6 @@ addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 
-newBookButton.addEventListener("click", () => {
-  bookForm.style.display = "block";
-});
-
-addButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, document.querySelector(`input[name="reads"]:checked`).value);
-  addBookToLibrary(bookx);
-  displayBooks();
-});
-
 function displayBooks() {
   bookTableHeader.innerHTML = "";
   bookTableBody.innerHTML = "";
@@ -50,6 +39,8 @@ function displayBooks() {
   if (myLibrary.length > 0) {
     let tr = document.createElement("tr");
     const headersData = Object.keys(myLibrary[0]);
+
+    // CREATE TABLE HEADER
     headersData.forEach((key) => {
       let th = document.createElement("th");
       th.innerHTML = key;
@@ -60,6 +51,7 @@ function displayBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
       let tr = document.createElement("tr");
 
+      // CREATE TABLE ROWS
       headersData.forEach((key) => {
         let td = document.createElement("td");
         td.innerHTML = myLibrary[i][key];
@@ -91,14 +83,25 @@ function displayBooks() {
 
 displayBooks();
 
+newBookButton.addEventListener("click", () => {
+  bookForm.style.display = "block";
+});
+
+addButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, document.querySelector(`input[name="reads"]:checked`).value);
+  addBookToLibrary(bookx);
+  displayBooks();
+  formTitle.value = "";
+  formAuthor.value = "";
+  formPages.value = "";
+  bookForm.style.display = "none";
+});
+
 function deleteRow(index) {
   myLibrary.splice(index, 1);
   displayBooks();
 }
-
-function radioButtons() {}
-
-let active = false;
 
 function readRow(index) {
   console.log(myLibrary[index]["read"]);
