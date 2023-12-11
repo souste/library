@@ -84,13 +84,15 @@ newBookButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", (event) => {
   event.preventDefault();
-  const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, document.querySelector(`input[name="reads"]:checked`).value);
-  addBookToLibrary(bookx);
-  displayBooks();
-  formTitle.value = "";
-  formAuthor.value = "";
-  formPages.value = "";
-  bookForm.style.display = "none";
+  if (validateForm()) {
+    const bookx = new Book(formTitle.value, formAuthor.value, formPages.value, document.querySelector(`input[name="reads"]:checked`).value);
+    addBookToLibrary(bookx);
+    displayBooks();
+    formTitle.value = "";
+    formAuthor.value = "";
+    formPages.value = "";
+    bookForm.style.display = "none";
+  }
 });
 
 function deleteRow(index) {
@@ -105,4 +107,14 @@ function readRow(index) {
     myLibrary[index]["read"] = "No";
   }
   displayBooks();
+}
+
+document.getElementById("theForm").addEventListener("submit", validateForm);
+
+function validateForm() {
+  if (formTitle.value === "" || formAuthor.value === "" || formPages.value === "") {
+    alert("All fields need to be filled in");
+    return false;
+  }
+  return true;
 }
